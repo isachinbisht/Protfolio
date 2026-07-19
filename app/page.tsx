@@ -60,7 +60,10 @@ export default function HomePage() {
           <div className="relative flex flex-1 flex-col items-center justify-center py-12">
             {/* Portrait image */}
             <Reveal className="w-[min(70vw,420px)]">
-              <div className="relative aspect-[3/4] w-full overflow-hidden">
+              <div
+                data-cursor-label="that's me"
+                className="relative aspect-[3/4] w-full overflow-hidden"
+              >
                 <Image
                   src="/hero-portrait.png"
                   alt="Yunus Emre Korkmaz portrait"
@@ -145,7 +148,11 @@ export default function HomePage() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
             {galleryWorks.map((w, i) => (
               <Reveal as="div" key={w.title} delay={(i % 3) * 90}>
-                <Link href="/projects" className="group block">
+                <Link
+                  href="/projects"
+                  data-cursor-label="quick peek"
+                  className="group block"
+                >
                   <div className="relative aspect-[3/4] w-full overflow-hidden bg-secondary/60 sm:aspect-[4/5]">
                     <Image
                       src={w.image || "/placeholder.svg"}

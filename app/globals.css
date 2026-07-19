@@ -205,26 +205,33 @@
   z-index: 9999;
   pointer-events: none;
   border-radius: 9999px;
-  mix-blend-mode: difference;
+  opacity: 0;
+  will-change: transform;
 }
 
 .cursor-dot {
-  width: 6px;
-  height: 6px;
-  margin: -3px 0 0 -3px;
+  width: 7px;
+  height: 7px;
+  margin: -3.5px 0 0 -3.5px;
   background: #fff;
+  mix-blend-mode: difference;
 }
 
 .cursor-ring {
-  width: 36px;
-  height: 36px;
-  margin: -18px 0 0 -18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  margin: -19px 0 0 -19px;
   border: 1px solid #fff;
+  mix-blend-mode: difference;
   transition:
-    width 0.25s ease,
-    height 0.25s ease,
-    margin 0.25s ease,
-    background-color 0.25s ease;
+    width 0.28s cubic-bezier(0.22, 1, 0.36, 1),
+    height 0.28s cubic-bezier(0.22, 1, 0.36, 1),
+    margin 0.28s cubic-bezier(0.22, 1, 0.36, 1),
+    background-color 0.28s ease,
+    border-color 0.28s ease;
 }
 
 .cursor-ring--active {
@@ -232,6 +239,31 @@
   height: 60px;
   margin: -30px 0 0 -30px;
   background-color: rgba(255, 255, 255, 0.12);
+}
+
+/* Labeled cursor over elements with data-cursor-label */
+.cursor-ring--label {
+  width: auto;
+  height: auto;
+  min-width: 88px;
+  margin: 0;
+  padding: 0.6rem 1rem;
+  border-color: transparent;
+  background-color: var(--primary);
+  mix-blend-mode: normal;
+  transform-origin: center;
+}
+
+.cursor-label {
+  font-size: 0.75rem;
+  line-height: 1;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+  color: var(--primary-foreground);
+}
+
+.cursor-ring--label + .cursor-dot {
+  opacity: 0;
 }
 
 @media (prefers-reduced-motion: reduce) {

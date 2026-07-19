@@ -1,22 +1,25 @@
 "use client"
 
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useRef } from "react"
 
 export function CustomCursor() {
   const dotRef = useRef<HTMLDivElement>(null)
   const ringRef = useRef<HTMLDivElement>(null)
-  const [enabled, setEnabled] = useState(false)
+  const labelRef = useRef<HTMLSpanElement>(null)
 
   useEffect(() => {
+    if (typeof window === "undefined") return
     if (!window.matchMedia("(hover: hover) and (pointer: fine)").matches) return
-    setEnabled(true)
-
-    const root = document.documentElement
-    root.classList.add("cursor-none-root")
 
     const dot = dotRef.current
     const ring = ringRef.current
-    if (!dot || !ring) return
+    const label = labelRef.current
+    if (!dot || !ring || !label) return
+
+    const root = document.documentElement
+    root.classList.add("cursor-none-root")
+    dot.style.opacity = "1"
+    ring.style.opacity = "1"
 
     const pos = { x: window.innerWidth / 2, y: window.innerHeight / 2 }
     const ringPos = { x: pos.x, y: pos.y }
@@ -28,15 +31,19 @@ export function CustomCursor() {
       dot!.style.transform = `translate3d(${e.clientX}px, ${e.clientY}px, 0)`
     }
 
-    function isInteractive(target: EventTarget | null) {
-      return (
-        target instanceof Element &&
-        target.closest("a, button, input, textarea, select, [data-cursor]")
+    function findInteractive(target: EventTarget | null) {
+      if (!(target instanceof Element)) return null
+      return target.closest<HTMLElement>(
+        "a, button, input, textarea, select, [data-cursor]",
       )
     }
 
     function onOver(e: MouseEvent) {
-      ring!.classList.toggle("cursor-ring--active", Boolean(isInteractive(e.target)))
+      const el = findInteractive(e.target)
+      const text = el?.getAttribute("data-cursor-label") ?? ""
+      ring!.classList.toggle("cursor-ring--active", Boolean(el))
+      ring!.classList.toggle("cursor-ring--label", Boolean(text))
+      label!.textContent = text
     }
 
     function tick() {
@@ -48,21 +55,25 @@ export function CustomCursor() {
 
     window.addEventListener("mousemove", onMove)
     window.addEventListener("mouseover", onOver)
+    window.addEventListener("mousedown", onDown)
+    window.addEventListener("mouseup", onUp)
     tick()
 
     return () => {
       cancelAnimationFrame(raf)
       window.removeEventListener("mousemove", onMove)
       window.removeEventListener("mouseover", onOver)
+      window.removeEventListener("mousedown", onDown)
+      window.removeEventListener("mouseup", onUp)
       root.classList.remove("cursor-none-root")
     }
   }, [])
 
-  if (!enabled) return null
-
   return (
     <>
-      <div ref={ringRef} className="cursor-ring" aria-hidden="true" />
+      <div ref={ringRef} className="cursor-ring" aria-hidden="true">
+        <span ref={labelRef} className="cursor-label" />
+      </div>
       <div ref={dotRef} className="cursor-dot" aria-hidden="true" />
     </>
   )
