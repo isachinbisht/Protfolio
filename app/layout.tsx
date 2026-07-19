@@ -1,6 +1,7 @@
 import { Analytics } from '@vercel/analytics/next'
 import type { Metadata, Viewport } from 'next'
 import { Outfit } from 'next/font/google'
+import { CustomCursor } from '@/components/custom-cursor'
 import './globals.css'
 
 const outfit = Outfit({
@@ -46,6 +47,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${outfit.variable} bg-background`}>
       <body className="font-sans antialiased">
+        <CustomCursor />
         {children}
         {process.env.NODE_ENV === 'production' && <Analytics />}
       </body>

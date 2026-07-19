@@ -2,32 +2,10 @@ import Image from "next/image"
 import { SiteHeader } from "@/components/site-header"
 import { SiteFooter } from "@/components/site-footer"
 import { LiveClock } from "@/components/live-clock"
+import { ScrollMarquee } from "@/components/scroll-marquee"
+import { Reveal } from "@/components/reveal"
 
 const marquee = "minimalism • obsession • perfectionism • aesthetics"
-
-function MarqueeRow() {
-  return (
-    <div className="flex whitespace-nowrap">
-      {[0, 1].map((dup) => (
-        <div
-          key={dup}
-          aria-hidden={dup > 0}
-          className="flex shrink-0 animate-marquee items-center"
-        >
-          {Array.from({ length: 6 }).map((_, i) => (
-            <span
-              key={i}
-              className="flex items-center gap-8 pr-8 text-7xl font-medium tracking-tight sm:text-8xl md:text-9xl"
-            >
-              <span>&#8226;</span>
-              {marquee}
-            </span>
-          ))}
-        </div>
-      ))}
-    </div>
-  )
-}
 
 export default function HomePage() {
   return (
@@ -47,24 +25,27 @@ export default function HomePage() {
 
           <div className="relative flex flex-1 flex-col items-center justify-center py-12">
             {/* Portrait image */}
-            <div className="relative aspect-[3/4] w-[min(70vw,420px)] overflow-hidden">
-              <Image
-                src="/hero-portrait.png"
-                alt="Yunus Emre Korkmaz portrait"
-                fill
-                priority
-                className="object-cover"
-                sizes="(max-width: 640px) 70vw, 420px"
-              />
-            </div>
+            <Reveal className="w-[min(70vw,420px)]">
+              <div className="relative aspect-[3/4] w-full overflow-hidden">
+                <Image
+                  src="/hero-portrait.png"
+                  alt="Yunus Emre Korkmaz portrait"
+                  fill
+                  priority
+                  className="object-cover"
+                  sizes="(max-width: 640px) 70vw, 420px"
+                />
+              </div>
+            </Reveal>
 
             <p className="mt-6 text-sm tracking-wide text-foreground/40">
               [yunus emre korkmaz]
             </p>
 
-            {/* Marquee overlaid across the vertical center, inverting over the image */}
-            <div className="pointer-events-none absolute inset-x-0 top-1/2 -translate-y-1/2 overflow-hidden text-white mix-blend-difference">
-              <MarqueeRow />
+            {/* Marquee overlaid across the vertical center, inverting over the image.
+                Speed reacts to scroll velocity. */}
+            <div className="pointer-events-none absolute inset-x-0 top-1/2 -translate-y-1/2 text-white mix-blend-difference">
+              <ScrollMarquee text={marquee} />
             </div>
           </div>
         </section>

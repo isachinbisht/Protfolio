@@ -190,3 +190,53 @@
 .animate-marquee-reverse {
   animation: marquee-reverse 30s linear infinite;
 }
+
+/* Custom cursor */
+.cursor-none-root,
+.cursor-none-root * {
+  cursor: none !important;
+}
+
+.cursor-dot,
+.cursor-ring {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  pointer-events: none;
+  border-radius: 9999px;
+  mix-blend-mode: difference;
+}
+
+.cursor-dot {
+  width: 6px;
+  height: 6px;
+  margin: -3px 0 0 -3px;
+  background: #fff;
+}
+
+.cursor-ring {
+  width: 36px;
+  height: 36px;
+  margin: -18px 0 0 -18px;
+  border: 1px solid #fff;
+  transition:
+    width 0.25s ease,
+    height 0.25s ease,
+    margin 0.25s ease,
+    background-color 0.25s ease;
+}
+
+.cursor-ring--active {
+  width: 60px;
+  height: 60px;
+  margin: -30px 0 0 -30px;
+  background-color: rgba(255, 255, 255, 0.12);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee,
+  .animate-marquee-reverse {
+    animation: none;
+  }
+}
