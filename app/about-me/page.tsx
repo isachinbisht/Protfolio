@@ -1,5 +1,6 @@
 import { SiteHeader } from "@/components/site-header"
 import { SiteFooter } from "@/components/site-footer"
+import { Reveal } from "@/components/reveal"
 
 const works = [
   { no: "01", title: "skynotech | iot smart site management platform", type: "web application" },
@@ -130,9 +131,11 @@ export default function AboutPage() {
             </p>
           </div>
           <div className="grid gap-6 md:grid-cols-3">
-            {discoveries.map((d) => (
-              <div
+            {discoveries.map((d, i) => (
+              <Reveal
+                as="div"
                 key={d.no}
+                delay={i * 90}
                 className="flex flex-col gap-3 rounded-2xl border border-foreground/10 bg-secondary/40 p-6"
               >
                 <span className="text-primary">&#9679;</span>
@@ -142,7 +145,7 @@ export default function AboutPage() {
                 <span className="text-sm text-foreground/50">{d.draw}</span>
                 <h3 className="text-xl text-foreground">{d.title}</h3>
                 <p className="text-sm leading-relaxed text-foreground/70">{d.body}</p>
-              </div>
+              </Reveal>
             ))}
           </div>
         </section>

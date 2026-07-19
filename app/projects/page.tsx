@@ -2,6 +2,7 @@ import Link from "next/link"
 import Image from "next/image"
 import { SiteHeader } from "@/components/site-header"
 import { SiteFooter } from "@/components/site-footer"
+import { Reveal } from "@/components/reveal"
 
 const filters = [
   "all",
@@ -74,8 +75,8 @@ export default function ProjectsPage() {
 
         {/* Project grid */}
         <div className="grid gap-x-6 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
-          {projects.map((p) => (
-            <article key={p.title} className="group">
+          {projects.map((p, i) => (
+            <Reveal as="article" key={p.title} delay={(i % 3) * 90} className="group">
               <div className="relative aspect-[4/3] overflow-hidden rounded-xl bg-secondary/60">
                 {p.image ? (
                   <Image
@@ -93,7 +94,7 @@ export default function ProjectsPage() {
               </div>
               <h3 className="mt-4 text-base text-foreground">{p.title}</h3>
               <p className="mt-1 text-sm text-foreground/50">{p.client}</p>
-            </article>
+            </Reveal>
           ))}
         </div>
 
