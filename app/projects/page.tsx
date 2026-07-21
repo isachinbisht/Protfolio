@@ -16,26 +16,38 @@ const filters = [
 
 const projects = [
   {
-    title: "skynotech | iot smart site management platform",
-    client: "skynotech",
+    title: "E-mate | An smart learning platform",
+    client: "Diratech Solutions",
     image: "/projects/skynotech-platform.png",
   },
   {
-    title: "skynotech | corporate brand & web presence",
-    client: "skynotech",
+    title: "UI/UX  | Restaurant management Web-App",
+    client: "Internship Project (DigiSamaksh)",
     image: "/projects/skynotech-web.png",
   },
   {
-    title: "balıkesir digital employment platform",
-    client: "balıkesir metropolitan municipality",
+    title: "Apple UI/UX Redesign | E-Commerce",
+    client: "Personal Project",
     image: "/projects/balikesir-employment.png",
   },
-  { title: "balıkesir | event app", client: "balıkesir metropolitan municipality" },
-  { title: "yakın kart | social financial assistance app", client: "balıkesir metropolitan municipality" },
-  { title: "bapka corporate website & information hub", client: "balıkesir planning and development agency" },
-  { title: "askıda fatura | social solidarity platform", client: "balıkesir metropolitan municipality" },
-  { title: "can dostlar | safe animal adoption platform", client: "balıkesir metropolitan municipality" },
-  { title: "balıkesir | pharmacy finder", client: "balıkesir metropolitan municipality" },
+  {
+    title: "Gravity protocol | Crypto Trading Web-App",
+    client: "Stellar (Hackathon)",
+    image: "/projects/balikesir-event.png",
+  },
+  {
+    title: "Axiom Landing Page | Web-App",
+    client: "Diratech Solutions",
+    image: "/projects/yakinkart.png",
+  },
+  {
+    title: "MPDA Corporate Website | Web-App",
+    client: "MPDA",
+    image: "/projects/bapka.png",
+  },
+  { title: "Coming soon", client: "" },
+  { title: "Coming soon", client: "" },
+  { title: "Coming soon", client: "" },
 ]
 
 export default function ProjectsPage() {

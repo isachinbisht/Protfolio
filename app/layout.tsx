@@ -11,32 +11,49 @@ const outfit = Outfit({
 })
 
 export const metadata: Metadata = {
-  title: "let's talk — get in touch",
+  metadataBase: new URL("https://isachinbisht.com"),
+  title: {
+    default: "Sachin Bisht | Founder & Full-Stack Engineer",
+    template: "%s | Sachin Bisht",
+  },
   description:
-    'Contact me to set up an online meeting or ask any questions you have.',
+    "Portfolio of Sachin Bisht, Founder of Diratech Solutions. Specializing in Web3, AI platforms, and high-performance mobile/web applications.",
+  keywords: [
+    "Sachin Bisht",
+    "Diratech Solutions",
+    "Full-Stack Developer",
+    "Web3 Developer",
+    "React Native Engineer",
+    "Delhi Developer",
+  ],
+  authors: [{ name: "Sachin Bisht", url: "https://isachinbisht.com" }],
+  creator: "Sachin Bisht",
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    url: "https://isachinbisht.com",
+    title: "Sachin Bisht | Founder & Software Engineer",
+    description: "Building scalable web & mobile products from the ground up.",
+    siteName: "Sachin Bisht Portfolio",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Sachin Bisht",
+    description: "Founder at Diratech Solutions & Full-Stack Developer",
+  },
+  alternates: {
+    canonical: "./",
+  },
   generator: 'v0.app',
   icons: {
-    icon: [
-      {
-        url: '/icon-light-32x32.png',
-        media: '(prefers-color-scheme: light)',
-      },
-      {
-        url: '/icon-dark-32x32.png',
-        media: '(prefers-color-scheme: dark)',
-      },
-      {
-        url: '/icon.svg',
-        type: 'image/svg+xml',
-      },
-    ],
-    apple: '/apple-icon.png',
+    icon: '/hero-portrait.png',
+    apple: '/hero-portrait.png',
   },
 }
 
 export const viewport: Viewport = {
   colorScheme: 'light',
-  themeColor: '#f8f8f8',
+  themeColor: '#ffffff',
 }
 
 export default function RootLayout({

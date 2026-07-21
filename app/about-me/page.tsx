@@ -3,38 +3,38 @@ import { SiteFooter } from "@/components/site-footer"
 import { Reveal } from "@/components/reveal"
 
 const works = [
-  { no: "01", title: "skynotech | iot smart site management platform", type: "web application" },
-  { no: "02", title: "balıkesir digital employment platform", type: "web application" },
-  { no: "03", title: "yakın kart | social financial assistance app", type: "mobile application" },
+  { no: "01", title: "gravity protocol | web3 & decentralized infrastructure platform", type: "web application" },
+  { no: "02", title: "e-mate | gen-z focused AI educational platform", type: "web & mobile application" },
+  { no: "03", title: "paws find | lost & found pet recovery app", type: "mobile application" },
 ]
 
 const discoveries = [
   {
     no: "discovery 01",
     draw: "draw a puzzle piece",
-    title: "i see the whole thing",
-    body: "i look at the whole job, not the pieces. what the user needs, what the work needs, what the tech allows... i try to keep all of it in my head.",
+    title: "i see the system",
+    body: "i look at how the entire application connects—from frontend state management and ui layout to backend data flow and api integration.",
   },
   {
     no: "discovery 02",
     draw: "draw a pen",
-    title: "i do both",
-    body: "i write code with a designer's eye. i fight to keep the thing in my head from breaking on its way to the screen.",
+    title: "i build end-to-end",
+    body: "i write code across the stack using modern frameworks like react native and firebase, bridging the gap between design and functionality.",
   },
   {
     no: "discovery 03",
     draw: "draw a checkmark",
-    title: "i leave it solid",
-    body: "i don't call it done until it feels right. i keep at it until it's fast and works properly.",
+    title: "i keep it solid",
+    body: "i don't call it done until the code is clean, the performance is smooth, and the user experience feels native and robust.",
   },
 ]
 
 const nowItems = [
-  "living in istanbul",
-  "drawing now and then",
-  "reading a lot, thinking a lot",
-  "daydreaming plenty",
-  "into psychology",
+  "living in delhi",
+  "founder of Diratech Solutions",
+  "building apps and exploring ai integration",
+  "reading, coding, and shipping code",
+  "deep into mobile and web development",
 ]
 
 const thoughts = [
@@ -73,13 +73,10 @@ export default function AboutPage() {
           <SectionLabel>[who am i]</SectionLabel>
           <div className="max-w-2xl space-y-5 text-lg leading-relaxed text-foreground/80">
             <p>
-              i&apos;m yunus emre. i was studying electrical engineering and quit
-              in my third year. i started coding, and while coding i got hooked
-              on design.
+              i&apos;m sachin. i&apos;m studying bca at jemtec (ipu), building my path through code while navigating college halls.
             </p>
             <p>
-              then it was time for my own thing. in 2023 i started skynotech in
-              istanbul. since then i both design and build.
+              i got hooked on software development, turning logic and architecture into real applications. since diving into the ecosystem, i code, engineer, and ship.
             </p>
           </div>
         </section>
@@ -89,12 +86,10 @@ export default function AboutPage() {
           <SectionLabel>[what i do]</SectionLabel>
           <div className="max-w-2xl space-y-5 text-lg leading-relaxed text-foreground/80">
             <p>
-              i design the interface and write its code myself. i don&apos;t see
-              them as two separate jobs.
+              i build mobile apps and web platforms from the ground up. i don&apos;t separate frontend polish from backend logic—i handle the full loop.
             </p>
             <p>
-              i make product interfaces, corporate sites, mobile apps. i take an
-              idea and turn it into something that works.
+              i make mobile applications, scalable web interfaces, and full-stack systems. i take an idea, map out the architecture, and turn it into something that actually runs.
             </p>
           </div>
         </section>

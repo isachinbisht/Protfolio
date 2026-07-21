@@ -4,19 +4,39 @@ import type React from "react"
 import { useState } from "react"
 
 const fields = [
-  { name: "name", label: "name, surname", placeholder: "yunus emre korkmaz", required: true, type: "text" },
+  { name: "name", label: "name, surname", placeholder: "sachin bisht", required: true, type: "text" },
   { name: "company", label: "company", placeholder: "apple computer, inc.", required: false, type: "text" },
   { name: "email", label: "email", placeholder: "example@example.com", required: true, type: "email" },
-  { name: "phone", label: "phone", placeholder: "+90 (5__) ___ __ __", required: false, type: "tel" },
+  { name: "phone", label: "phone", placeholder: "+91___________", required: false, type: "tel" },
   { name: "subject", label: "subject", placeholder: "web app, mobile app, ui/ux design", required: false, type: "text" },
 ] as const
 
 export function ContactForm() {
   const [submitted, setSubmitted] = useState(false)
+  const [loading, setLoading] = useState(false)
 
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
-    setSubmitted(true)
+    setLoading(true)
+
+    const formData = new FormData(e.currentTarget)
+    formData.append("access_key", "35ed5b18-3424-44af-bbc1-f538d79b93d1")
+
+    try {
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        body: formData,
+      })
+
+      if (response.ok) {
+        setSubmitted(true)
+        e.currentTarget.reset()
+      }
+    } catch (error) {
+      console.error(error)
+    } finally {
+      setLoading(false)
+    }
   }
 
   return (
@@ -54,10 +74,11 @@ export function ContactForm() {
       <div className="pt-2">
         <button
           type="submit"
-          className="inline-flex items-center gap-2 rounded-full bg-primary px-5 py-2.5 text-sm font-medium text-primary-foreground transition-transform hover:scale-105"
+          disabled={loading || submitted}
+          className="inline-flex items-center gap-2 rounded-full bg-primary px-5 py-2.5 text-sm font-medium text-primary-foreground transition-transform hover:scale-105 disabled:opacity-70 disabled:hover:scale-100"
         >
           <span>&#9679;</span>
-          {submitted ? "thanks, i'll reach out!" : "let's get started"}
+          {loading ? "sending..." : submitted ? "thanks, i'll reach out!" : "let's get started"}
         </button>
       </div>
     </form>

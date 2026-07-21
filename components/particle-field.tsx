@@ -61,7 +61,7 @@ export function ParticleField() {
       ctx.clearRect(0, 0, width, height)
       const cx = width / 2
       const cy = height / 2
-      ctx.fillStyle = "rgba(20,20,20,0.85)"
+      ctx.fillStyle = "rgba(180,180,190,0.65)"
 
       for (const p of particles) {
         // gentle drift

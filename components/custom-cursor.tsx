@@ -46,6 +46,14 @@ export function CustomCursor() {
       label!.textContent = text
     }
 
+    function onDown() {
+      dot!.style.transform = `translate3d(${pos.x}px, ${pos.y}px, 0) scale(0.6)`
+    }
+
+    function onUp() {
+      dot!.style.transform = `translate3d(${pos.x}px, ${pos.y}px, 0) scale(1)`
+    }
+
     function tick() {
       ringPos.x += (pos.x - ringPos.x) * 0.18
       ringPos.y += (pos.y - ringPos.y) * 0.18

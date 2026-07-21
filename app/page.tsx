@@ -10,40 +10,67 @@ const marquee = "minimalism • obsession • perfectionism • aesthetics"
 
 const galleryWorks = [
   {
-    title: "skynotech | iot smart site management platform",
-    client: "skynotech",
+    title: "E-mate | An smart learning platform",
+    client: "Diratech Solutions(Under Dev)",
     image: "/projects/skynotech-platform.png",
+    src: "",
   },
   {
-    title: "skynotech | corporate brand & web presence",
-    client: "skynotech",
+    title: "UI/UX  | Restaurant management Web-App",
+    client: "Internship Project (DigiSamaksh)",
     image: "/projects/skynotech-web.png",
+    src: "",
   },
   {
-    title: "balıkesir digital employment platform",
-    client: "balıkesir metropolitan municipality",
+    title: "Apple UI/UX Redesign | E-Commerce",
+    client: "Personal Project",
     image: "/projects/balikesir-employment.png",
+    src: "",
   },
   {
-    title: "balıkesir | event app",
-    client: "balıkesir metropolitan municipality",
+    title: "Gravity protocol | Crypto Trading Web-App",
+    client: "Stellar (Hackathon)",
     image: "/projects/balikesir-event.png",
+    src: "https://gravity-protocol-landing-page-pe8409u3i-isachinbishts-projects.vercel.app/",
   },
   {
-    title: "yakın kart | social financial assistance app",
-    client: "balıkesir metropolitan municipality",
+    title: "Axiom Landing Page | Web-App",
+    client: "Diratech Solutions",
     image: "/projects/yakinkart.png",
+    src: "https://aaxiom.netlify.app/",
   },
   {
-    title: "bapka corporate website & information hub",
-    client: "balıkesir planning and development agency",
+    title: "MPDA Corporate Website | Web-App",
+    client: "MPDA",
     image: "/projects/bapka.png",
+    src: "",
   },
 ]
 
 export default function HomePage() {
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    name: "Sachin Bisht",
+    jobTitle: "Founder & Full-Stack Developer",
+    worksFor: {
+      "@type": "Organization",
+      name: "Diratech Solutions",
+    },
+    url: "https://isachinbisht.com",
+    sameAs: [
+      "https://github.com/isachinbisht",
+      "https://www.linkedin.com/in/isachinbisht/",
+    ],
+  };
+
   return (
-    <div className="flex min-h-svh flex-col bg-background">
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <div className="flex min-h-svh flex-col bg-background">
       <SiteHeader />
 
       <main className="flex-1">
@@ -53,7 +80,7 @@ export default function HomePage() {
             <LiveClock />
             <span className="flex items-center gap-2 text-sm text-foreground/50">
               <span className="text-primary">&#9711;</span>
-              lend an ear
+              hey ya
             </span>
           </div>
 
@@ -76,7 +103,7 @@ export default function HomePage() {
             </Reveal>
 
             <p className="mt-6 text-sm tracking-wide text-foreground/40">
-              [yunus emre korkmaz]
+              [sachin bisht]
             </p>
 
             {/* Marquee overlaid across the vertical center, inverting over the image.
@@ -99,7 +126,7 @@ export default function HomePage() {
             <Reveal className="order-2 lg:order-1">
               <p className="font-mono text-sm text-foreground/60">[hey, i&apos;m]</p>
               <p className="mt-1 font-mono text-sm text-foreground/60">
-                [yunus emre korkmaz]
+                [sachin bisht]
               </p>
             </Reveal>
 
@@ -107,7 +134,7 @@ export default function HomePage() {
               <div className="relative aspect-[3/4] w-[min(60vw,240px)] overflow-hidden">
                 <Image
                   src="/about-portrait.png"
-                  alt="Yunus Emre Korkmaz"
+                  alt="Sachin Bisht"
                   fill
                   className="object-cover"
                   sizes="(max-width: 640px) 60vw, 240px"
@@ -149,7 +176,9 @@ export default function HomePage() {
             {galleryWorks.map((w, i) => (
               <Reveal as="div" key={w.title} delay={(i % 3) * 90}>
                 <Link
-                  href="/projects"
+                  href={w.src || "/projects"}
+                  target={w.src ? "_blank" : undefined}
+                  rel={w.src ? "noreferrer" : undefined}
                   data-cursor-label="quick peek"
                   className="group block"
                 >
@@ -203,5 +232,6 @@ export default function HomePage() {
 
       <SiteFooter wordmark />
     </div>
+    </>
   )
 }

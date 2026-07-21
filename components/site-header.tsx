@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect, useRef, useCallback } from "react"
 import Link from "next/link"
 
 const menuLinks = [
@@ -14,6 +14,36 @@ const menuLinks = [
 export function SiteHeader() {
   const [open, setOpen] = useState(false)
   const [lang, setLang] = useState<"en" | "tr">("en")
+  const [mounted, setMounted] = useState(false)
+  const islandRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
+
+  // Close on outside click
+  useEffect(() => {
+    if (!open) return
+    function handleClick(e: MouseEvent) {
+      if (islandRef.current && !islandRef.current.contains(e.target as Node)) {
+        setOpen(false)
+      }
+    }
+    document.addEventListener("mousedown", handleClick)
+    return () => document.removeEventListener("mousedown", handleClick)
+  }, [open])
+
+  // Close on Escape
+  useEffect(() => {
+    if (!open) return
+    function handleKey(e: KeyboardEvent) {
+      if (e.key === "Escape") setOpen(false)
+    }
+    document.addEventListener("keydown", handleKey)
+    return () => document.removeEventListener("keydown", handleKey)
+  }, [open])
+
+  const toggle = useCallback(() => setOpen((v) => !v), [])
 
   return (
     <header className="pointer-events-none fixed inset-x-0 top-0 z-50 px-4 py-4">
@@ -27,68 +57,64 @@ export function SiteHeader() {
           <span>get in touch</span>
         </Link>
 
-        {/* Center menu button */}
-        <div className="fixed left-1/2 top-4 z-50 -translate-x-1/2">
+        {/* ─── Dynamic Island ─── */}
+        <div className="fixed left-1/2 top-3 z-50 -translate-x-1/2" ref={islandRef}>
           <div
-            className={`overflow-hidden rounded-3xl bg-card text-card-foreground shadow-lg transition-all duration-300 ${
-              open ? "w-[280px] sm:w-[320px]" : "w-[168px]"
-            }`}
+            className="dynamic-island"
+            data-expanded={open}
+            onClick={!open ? toggle : undefined}
+            role={!open ? "button" : undefined}
+            tabIndex={!open ? 0 : undefined}
+            onKeyDown={!open ? (e) => { if (e.key === "Enter" || e.key === " ") toggle() } : undefined}
           >
-            {/* top bar */}
-            <div className="flex items-center justify-between px-5 py-3">
-              {open ? (
-                <span className="flex items-center gap-2 text-xs text-card-foreground/60">
-                  <span>&#9675;</span>
-                  <span>lend an ear</span>
-                </span>
-              ) : (
-                <span className="font-mono text-sm tracking-widest text-card-foreground/70">
-                  [ ]
-                </span>
-              )}
-              <button
-                type="button"
-                onClick={() => setOpen((v) => !v)}
-                aria-expanded={open}
-                aria-label={open ? "close menu" : "open menu"}
-                className="text-sm font-medium text-card-foreground transition-opacity hover:opacity-70"
-              >
-                {open ? "close" : "menu"}
-              </button>
+            {/* ── Collapsed state ── */}
+            <div className="island-collapsed" data-hidden={open}>
+              <span className="island-dot" />
+              <span className="island-collapsed-label">menu</span>
             </div>
 
-            {/* expanded panel */}
-            <div
-              className={`grid transition-all duration-300 ${
-                open ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
-              }`}
-            >
-              <div className="overflow-hidden">
-                <nav aria-label="main menu" className="flex flex-col gap-1 px-5 pb-4 pt-2">
-                  {menuLinks.map((link) => (
-                    <Link
-                      key={link.label}
-                      href={link.href}
-                      onClick={() => setOpen(false)}
-                      className="flex items-center gap-3 py-1 text-2xl text-card-foreground/80 transition-colors hover:text-card-foreground"
-                    >
-                      <span className="text-primary text-base">&#9679;</span>
-                      {link.label}
-                    </Link>
-                  ))}
-                </nav>
-                <div className="flex items-center justify-between border-t border-white/10 px-5 py-3 text-xs">
-                  <span className="font-mono tracking-widest text-card-foreground/70">
-                    [ yeqq ]
-                  </span>
-                  <div className="flex items-center gap-3 text-card-foreground/60">
-                    <a href="#" className="transition-colors hover:text-card-foreground">
-                      instagram
-                    </a>
-                    <a href="#" className="transition-colors hover:text-card-foreground">
-                      github
-                    </a>
-                  </div>
+            {/* ── Expanded state ── */}
+            <div className="island-expanded" data-visible={open}>
+              {/* Top bar */}
+              <div className="island-topbar">
+                <span className="island-topbar-tag">
+                  <span className="island-dot" />
+                  <span>hey ya</span>
+                </span>
+                <button
+                  type="button"
+                  onClick={toggle}
+                  aria-expanded={open}
+                  aria-label="close menu"
+                  className="island-close-btn"
+                >
+                  close
+                </button>
+              </div>
+
+              {/* Nav links */}
+              <nav aria-label="main menu" className="island-nav">
+                {menuLinks.map((link, i) => (
+                  <Link
+                    key={link.label}
+                    href={link.href}
+                    onClick={() => setOpen(false)}
+                    className="island-link"
+                    style={{ transitionDelay: open ? `${80 + i * 40}ms` : "0ms" }}
+                    data-visible={open}
+                  >
+                    <span className="island-link-dot">&#9679;</span>
+                    {link.label}
+                  </Link>
+                ))}
+              </nav>
+
+              {/* Bottom bar */}
+              <div className="island-bottom">
+                <span className="island-bottom-name">[sachin]</span>
+                <div className="island-bottom-socials">
+                  <a href="https://linkedin.com/in/isachinbisht" target="_blank" rel="noreferrer" className="island-social-link">linkedin</a>
+                  <a href="#" className="island-social-link">github</a>
                 </div>
               </div>
             </div>

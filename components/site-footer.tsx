@@ -8,7 +8,7 @@ const links = [
 ]
 
 const socials = [
-  { label: "instagram", href: "https://instagram.com" },
+  { label: "linkedin", href: "https://linkedin.com/in/isachinbisht" },
   { label: "github", href: "https://github.com" },
 ]
 
@@ -70,7 +70,7 @@ export function SiteFooter({ wordmark = false }: { wordmark?: boolean }) {
 
         <div className="flex items-end">
           <p className="text-sm text-foreground/50">
-            designed &amp; built by yunus emre korkmaz &copy; 2026
+            designed &amp; built by sachin bisht &copy; 2026
           </p>
         </div>
       </div>
@@ -78,7 +78,7 @@ export function SiteFooter({ wordmark = false }: { wordmark?: boolean }) {
       {wordmark && (
         <div className="mx-auto mt-12 max-w-6xl">
           <p className="select-none text-center font-mono text-[22vw] font-medium leading-none tracking-tighter text-foreground lg:text-[16rem]">
-            [yeqq]
+            [Sayonara]
           </p>
         </div>
       )}
