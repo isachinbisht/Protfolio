@@ -64,11 +64,37 @@ export default function HomePage() {
     ],
   };
 
+  const organizationJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Diratech Solutions",
+    "legalName": "Diratech Solutions",
+    "url": "https://isachinbisht.com",
+    "logo": "https://isachinbisht.com/hero-portrait.png",
+    "founder": {
+      "@type": "Person",
+      "name": "Sachin Bisht",
+      "sameAs": [
+        "https://www.linkedin.com/in/isachinbisht/",
+        "https://github.com/isachinbisht"
+      ]
+    },
+    "description": "Diratech Solutions is a technology firm specializing in web applications, AI platforms, and decentralized software architecture.",
+    "sameAs": [
+      "https://www.linkedin.com/company/diratech",
+      "https://github.com/isachinbisht"
+    ]
+  };
+
   return (
     <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
       />
       <div className="flex min-h-svh flex-col bg-background">
       <SiteHeader />
